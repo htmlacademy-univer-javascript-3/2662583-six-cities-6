@@ -1,5 +1,6 @@
 
 import { Link } from 'react-router-dom';
+import './not-fount-page.css';
 
 function NotFoundPage(): JSX.Element{
   return (
@@ -17,16 +18,13 @@ function NotFoundPage(): JSX.Element{
       </header>
       <main className="page__main">
         <div className="container">
-          <h1 style={{ fontSize: '48px', marginBottom: '20px' }}>404</h1>
-          <p style={{ fontSize: '24px', marginBottom: '30px' }}>
+          <h1 className="not-found-page__title">404</h1>
+          <p className="not-found-page__text">
             Page not found
           </p>
           <Link
             to="/"
-            style={{
-              fontSize: '18px',
-              textDecoration: 'underline'
-            }}
+            className="not-found-page__link"
           >
             Go to main page
           </Link>
