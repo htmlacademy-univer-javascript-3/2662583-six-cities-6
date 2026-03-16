@@ -1,10 +1,10 @@
 import { Link, useParams } from 'react-router-dom';
-import { Offer } from '../../../mocks/offers';
+import { ExtendedOffer } from '../../../mocks/offers';
 import PlaceCard from '../../place-card/place-card';
 import ReviewForm from '../../review-form/review-form';
 
 type OfferPageProps = {
-  offers: Offer[];
+  offers: ExtendedOffer[];
 }
 function OfferPage({ offers }: OfferPageProps):JSX.Element{
   const { id } = useParams();
@@ -27,7 +27,7 @@ function OfferPage({ offers }: OfferPageProps):JSX.Element{
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <Link className="header__nav-link header__nav-link--profile" to="#">
+                  <Link className="header__nav-link header__nav-link--profile" to="/favorites">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>

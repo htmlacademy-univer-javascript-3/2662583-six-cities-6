@@ -27,6 +27,10 @@ export type Offer = {
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
+  previewImage: string;
+}
+
+export type ExtendedOffer = Offer & {
   description: string;
   bedrooms: number;
   goods: string[];
@@ -57,6 +61,82 @@ export const offers: Offer[] = [
     isFavorite: false,
     isPremium: true,
     rating: 4.8,
+    previewImage: 'img/room.jpg'
+  },
+  {
+    id: '2d2d2d2d-2d2d-2d2d-2d2d-2d2d2d2d2d2d',
+    title: 'Wood and stone place',
+    type: 'room',
+    price: 80,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 8
+      }
+    },
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 12
+    },
+    isFavorite: true,
+    isPremium: false,
+    rating: 4.4,
+    previewImage: 'img/room.jpg'
+  },
+  {
+    id: '3c3c3c3c-3c3c-3c3c-3c3c-3c3c3c3c3c3c',
+    title: 'Canal View Prinsengracht',
+    type: 'apartment',
+    price: 132,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 8
+      }
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 12
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 4.6,
+    previewImage: 'img/apartment-02.jpg'
+  },
+  {
+    id: '4d4d4d4d-4d4d-4d4d-4d4d-4d4d4d4d4d4d',
+    title: 'Nice, cozy, warm big bed apartment',
+    type: 'apartment',
+    price: 180,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 8
+      }
+    },
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 12
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 5.0,
+    previewImage: 'img/apartment-03.jpg'
+  }
+];
+
+export const extendedOffers: ExtendedOffer[] = [
+  {
+    ...offers[0],
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
     bedrooms: 3,
     goods: [
@@ -87,26 +167,7 @@ export const offers: Offer[] = [
     maxAdults: 4
   },
   {
-    id: '2d2d2d2d-2d2d-2d2d-2d2d-2d2d2d2d2d2d',
-    title: 'Wood and stone place',
-    type: 'room',
-    price: 80,
-    city: {
-      name: 'Amsterdam',
-      location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
-        zoom: 8
-      }
-    },
-    location: {
-      latitude: 52.3609553943508,
-      longitude: 4.85309666406198,
-      zoom: 12
-    },
-    isFavorite: true,
-    isPremium: false,
-    rating: 4.4,
+    ...offers[1],
     description: 'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
     bedrooms: 1,
     goods: [
@@ -128,26 +189,7 @@ export const offers: Offer[] = [
     maxAdults: 2
   },
   {
-    id: '3c3c3c3c-3c3c-3c3c-3c3c-3c3c3c3c3c3c',
-    title: 'Canal View Prinsengracht',
-    type: 'apartment',
-    price: 132,
-    city: {
-      name: 'Amsterdam',
-      location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
-        zoom: 8
-      }
-    },
-    location: {
-      latitude: 52.3909553943508,
-      longitude: 4.929309666406198,
-      zoom: 12
-    },
-    isFavorite: false,
-    isPremium: false,
-    rating: 4.6,
+    ...offers[2],
     description: 'Beautiful apartment with direct view to the canal. Perfect for romantic getaway or business trip.',
     bedrooms: 2,
     goods: [
@@ -172,26 +214,7 @@ export const offers: Offer[] = [
     maxAdults: 3
   },
   {
-    id: '4d4d4d4d-4d4d-4d4d-4d4d-4d4d4d4d4d4d',
-    title: 'Nice, cozy, warm big bed apartment',
-    type: 'apartment',
-    price: 180,
-    city: {
-      name: 'Amsterdam',
-      location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
-        zoom: 8
-      }
-    },
-    location: {
-      latitude: 52.3809553943508,
-      longitude: 4.939309666406198,
-      zoom: 12
-    },
-    isFavorite: false,
-    isPremium: true,
-    rating: 5.0,
+    ...offers[3],
     description: 'Cozy apartment in the heart of the city. Close to all attractions and public transport.',
     bedrooms: 2,
     goods: [

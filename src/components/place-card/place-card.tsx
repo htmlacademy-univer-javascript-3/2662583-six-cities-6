@@ -13,11 +13,10 @@ function PlaceCard({ offer }: PlaceCardProps): JSX.Element {
     price,
     isPremium,
     isFavorite,
-    images,
-    rating
+    rating,
+    previewImage
   } = offer;
 
-  const previewImage = images[0];
   return (
     <article className="cities__card place-card">
       {isPremium && (

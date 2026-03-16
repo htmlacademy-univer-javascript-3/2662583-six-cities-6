@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { RATINGS, MIN_COMMENT_LENGTH } from '../../const';
 
 type ReviewFormProps = {
   onSubmit: (rating: number, comment: string) => void;
@@ -8,17 +9,10 @@ function ReviewForm({ onSubmit }: ReviewFormProps): JSX.Element {
   const [rating, setRating] = useState<number | null>(null);
   const [comment, setComment] = useState<string>('');
 
-  const starTitles: Record<number, string> = {
-    5: 'perfect',
-    4: 'good',
-    3: 'not bad',
-    2: 'badly',
-    1: 'terribly',
-  };
 
   const handleSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
-    if (rating && comment.length >= 50) {
+    if (rating && comment.length >= MIN_COMMENT_LENGTH) {
       onSubmit(rating, comment);
       setRating(null);
       setComment('');
@@ -32,21 +26,21 @@ function ReviewForm({ onSubmit }: ReviewFormProps): JSX.Element {
       </label>
 
       <div className="reviews__rating-form form__rating">
-        {[5, 4, 3, 2, 1].map((star) => (
-          <div key={star}>
+        {RATINGS.map(({ value, title }) => (
+          <div key={value}>
             <input
               className="form__rating-input visually-hidden"
               name="rating"
-              value={star}
-              id={`${star}-stars`}
+              value={value}
+              id={`${value}-stars`}
               type="radio"
-              checked={rating === star}
-              onChange={() => setRating(star)}
+              checked={rating === value}
+              onChange={() => setRating(value)}
             />
             <label
-              htmlFor={`${star}-stars`}
+              htmlFor={`${value}-stars`}
               className="reviews__rating-label form__rating-label"
-              title={starTitles[star]}
+              title={title}
             >
               <svg className="form__star-image" width="37" height="33">
                 <use xlinkHref="#icon-star"></use>

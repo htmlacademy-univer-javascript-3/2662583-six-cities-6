@@ -5,14 +5,15 @@ import FavoritesPage from '../pages/favorites-page/favorites-page';
 import OfferPage from '../pages/offer-page/offer-page';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
-import { Offer } from '../../mocks/offers';
+import { Offer, ExtendedOffer } from '../../mocks/offers';
 
 type AppProps = {
   offersCount: number;
   offers: Offer[];
+  extendedOffers: ExtendedOffer[];
 }
 
-function App({ offersCount, offers }: AppProps): JSX.Element{
+function App({ offersCount, offers, extendedOffers }: AppProps): JSX.Element{
   return (
     <BrowserRouter>
       <Routes>
@@ -25,7 +26,7 @@ function App({ offersCount, offers }: AppProps): JSX.Element{
             </PrivateRoute>
           }
         />
-        <Route path="/offer/:id" element={<OfferPage offers={offers}/>} />
+        <Route path="/offer/:id" element={<OfferPage offers={extendedOffers}/>} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
