@@ -1,24 +1,24 @@
 import { Link } from 'react-router-dom';
-import { Offer } from '../../../mocks/offers';
-import PlaceCard from '../../place-card/place-card';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
+import FavoritesList from '../../favorites-list/favorites-list';
+import FavoritesEmpty from '../../favorites-empty/favorites-empty';
 
-type FavoritesPageProps = {
-  offers: Offer[];
-}
-function FavoritesPage({ offers }: FavoritesPageProps):JSX.Element{
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+function FavoritesPage(): JSX.Element {
+  const allOffers = useSelector((state: RootState) => state.offers);
+  const favoriteOffers = allOffers.filter((offer) => offer.isFavorite);
 
-  const offersByCity = favoriteOffers.reduce<Record<string, Offer[]>>(
-    (acc, offer) => {
-      if (!acc[offer.city.name]) {
-        acc[offer.city.name] = [];
-      }
-      acc[offer.city.name].push(offer);
-      return acc;
-    },
-    {}
-  );
-  const cities = Object.keys(offersByCity);
+  const favoritesByCity = favoriteOffers.reduce<Record<string, typeof favoriteOffers>>((acc, offer) => {
+    const cityName = offer.city.name;
+    if (!acc[cityName]) {
+      acc[cityName] = [];
+    }
+    acc[cityName].push(offer);
+    return acc;
+  }, {});
+
+  const hasFavorites = favoriteOffers.length > 0;
+
   return (
     <div className="page">
       <header className="header">
@@ -53,29 +53,16 @@ function FavoritesPage({ offers }: FavoritesPageProps):JSX.Element{
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {cities.map((city) => (
-                <li className="favorites__locations-items" key={city}>
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-                      <Link className="locations__item-link" to="#">
-                        <span>{city}</span>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="favorites__places">
-                    {offersByCity[city].map((offer) => (
-                      <PlaceCard key={offer.id} offer={offer} />
-                    ))}
-                  </div>
-                </li>
-              ))}
-            </ul>
+            {hasFavorites ? (
+              <FavoritesList favoritesByCity={favoritesByCity} />
+            ) : (
+              <FavoritesEmpty />
+            )}
           </section>
         </div>
       </main>
       <footer className="footer container">
-        <Link className="footer__logo-link" to="main.html">
+        <Link className="footer__logo-link" to="/">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
         </Link>
       </footer>
