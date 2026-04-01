@@ -3,3 +3,4 @@ import { Offer } from '../mocks/offers';
 
 export const changeCity = createAction<string>('city/change');
 export const loadOffers = createAction<Offer[]>('offers/load');
+export const changeSortType = createAction<string>('sort/change');

@@ -1,18 +1,20 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import {useSelector } from 'react-redux';
+import {useSelector, useDispatch } from 'react-redux';
 import OffersList from '../../offers-list/offers-list';
 import Map from '../../map/map';
 import CitiesList from '../../cities-list/cities-list';
 import SortingOptions from '../../sorting-options/sorting-options';
 import { RootState } from '../../../store';
+import { changeSortType } from '../../../store/action';
 
 
 function MainPage(): JSX.Element {
+  const dispatch = useDispatch();
   const currentCity = useSelector((state: RootState) => state.city);
   const allOffers = useSelector((state: RootState) => state.offers);
+  const sortType = useSelector((state: RootState) => state.sortType);
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
-  const [sortType, setSortType] = useState<string>('Popular');
 
 
   const filteredOffers = useMemo(() =>
@@ -41,7 +43,7 @@ function MainPage(): JSX.Element {
   };
 
   const handleSortChange = (sortTypeValue: string) => {
-    setSortType(sortTypeValue);
+    dispatch(changeSortType(sortTypeValue));
   };
 
   return (

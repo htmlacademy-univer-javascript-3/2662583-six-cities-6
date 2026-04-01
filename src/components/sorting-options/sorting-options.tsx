@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 import { SORT_OPTIONS } from '../../const';
 
 type SortingOptionsProps = {
@@ -7,14 +9,13 @@ type SortingOptionsProps = {
 
 function SortingOptions({ onSortChange }: SortingOptionsProps): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [currentSort, setCurrentSort] = useState<string>(SORT_OPTIONS[0]);
+  const currentSort = useSelector((state: RootState) => state.sortType);
 
   const handleSortClick = () => {
     setIsOpen(!isOpen);
   };
 
   const handleSortSelect = (sortType: string) => {
-    setCurrentSort(sortType);
     onSortChange(sortType);
     setIsOpen(false);
   };
